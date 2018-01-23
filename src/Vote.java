@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
  */
 public class Vote extends JFrame implements ActionListener {
 
+    String login;
+    String pwd;
+    int id;
+
     private int choix;
 
     public int getChoix() {
@@ -19,7 +23,10 @@ public class Vote extends JFrame implements ActionListener {
     JPanel panel;
     ButtonGroup group;
     JRadioButton un, deux;
-    public Vote(){
+    public Vote(String login, String pwd , int id){
+        this.login=login;
+        this.pwd=pwd;
+        this.id=id;
 
 
         SUBMIT=new JButton("SUBMIT");
@@ -54,6 +61,10 @@ public class Vote extends JFrame implements ActionListener {
         choix=-1;
         if(choix1) choix = 0;
         if (choix2) choix =1;
+        Client c = new Client(login, pwd, id);
+        Trustee t = new Trustee();
+        t.ballotbox(Trustee.BB, c.vote(id, choix));
+        //TODO if(!c.verifyvote())==> alert
         dispose();
     }
 }
