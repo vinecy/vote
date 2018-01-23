@@ -6,6 +6,7 @@ public class Client {
     private String login;
     private String pwd;
     private int id;
+    public Boolean voted = false;
 
     public Client( String login, String pwd, int id) {
         this.login = login;
@@ -22,9 +23,8 @@ public class Client {
          */
     public Credentials Register(int security_parameter, int id){
         Credentials c = new Credentials(Signature.skeygen(security_parameter),Signature.skeygen(security_parameter));
-        Trustee.L.add(c.upk);
-        p.upk=c.upk;
-        p.usk=c.usk;
+        //Trustee.L.add(c.upk);
+        p = new Credentials(c.usk,c.usk);
         return(c);
     }
 
@@ -33,6 +33,7 @@ public class Client {
    may/may not include the identifier id. The identifier id can be seen as an optional input.
     */
     public Ballot vote ( int id,  int v){
+        Register(1, id);
         int C =  Crypto.Enc(p.upk, v);
         int pi =  Disj.disjproof( 1, p.upk,1, 1);
         Ballot b = new Ballot(p.upk, C, pi, Signature.sign(p.usk, Integer.toString(C)+Integer.toString(pi)));

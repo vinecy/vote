@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class Trustee {
 
     public static final ArrayList<Integer> L = null ;
-    public static  ArrayList<Ballot> BB = null ;
+    public static  ArrayList<Ballot> BB = new ArrayList<>(3);
     int index;
 
 
@@ -66,7 +66,7 @@ Validate(b) takes as input a ballot b and returns accept or reject for well/ill-
  */
     public Boolean validate (Ballot b)
     {
-        if (    !L.contains(b.upk) &&
+        if (   // !L.contains(b.upk) &&
                 Disj.disjverify(1,b.upk, b.C, b.pi) &&
                 Signature.sverify(b.upk,Integer.toString(b.C)+Integer.toString(b.pi))) {
             return(true);

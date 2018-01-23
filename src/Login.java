@@ -47,7 +47,7 @@ class Login extends JFrame implements ActionListener
             String value1=text1.getText();
             String value2=text2.getText();
             String value3=text3.getText();
-            if (value1.equals("zied") && value3.equals("motdepasse") ) {
+            if (value1.equals("login") && value3.equals("pwd") ) {
                 System.out.println("ok");
 
             Vote vote = new Vote(value1,value3,Integer.parseInt(value2));

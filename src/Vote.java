@@ -64,6 +64,7 @@ public class Vote extends JFrame implements ActionListener {
         Client c = new Client(login, pwd, id);
         Trustee t = new Trustee();
         t.ballotbox(Trustee.BB, c.vote(id, choix));
+        c.voted = true;
         //TODO if(!c.verifyvote())==> alert
         dispose();
     }

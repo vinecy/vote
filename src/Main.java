@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * Created by zied on 23/01/18.
@@ -11,6 +12,9 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
+
+        ArrayList<Integer> test=new ArrayList<>(1);
+        test.add(1);
 
         int t ;
         //demander t
@@ -33,13 +37,25 @@ public class Main {
         nbClient = Integer.parseInt(s);
         //construire L
 
-        //creer tout les trustee
-        //creer tout les clients
+        ArrayList<Client> L =new ArrayList<Client>(3);
+        L.add(new Client("login", "pwd", 1));
+        L.add(new Client("login", "pwd", 2));
+        L.add(new Client("login", "pwd", 3));
 
-        //for(){Login)
 
+        for (int i=0; i<nbClient;i++)
+        {
+            Login k = new Login();
+        }
 
+        while(!(L.get(0).voted  && L.get(1).voted  && L.get(2).voted ))
+        {
+                System.out.println(L.get(0).voted+" "+L.get(1).voted+" "+L.get(2).voted);
+        }
 
+        for (Ballot b:Trustee.BB
+             ) {
+            System.out.println(b.upk);
+        }
     }
-
 }
