@@ -83,13 +83,18 @@ public class Algo {
      */
     public Result tally (Bulletinboard BB, int sk){
         //etape 1,2,3
+        String somme_r = null;
+        String somme_s = null;
         ArrayList<Integer> liste = null;
         for (Ballot bb: BB.ballots  ) {
             if (!validate(bb) || liste.contains(bb.upk)) {
                 return(new Result(false, 1));
             }
             liste.add(bb.upk);
+            somme_r.concat(Integer.toString(bb.C));
+            somme_s.concat(bb.sign);
         }
+        String c = Crypto.sharedec(sk, 1 , somme_r, somme_s);
         return null;
     }
 

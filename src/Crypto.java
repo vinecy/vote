@@ -24,10 +24,16 @@ public class Crypto {
     }
 
 
-    public void sharedec(ArrayList ski, ArrayList vki, ArrayList C){
+    public static String  sharedec(int ski, int vki, String R, String S){
         /*
             ShareDec(ski , vki , C) outputs (i, ci = Rxi ).
         */
+        return (null);
+    }
+
+
+    public boolean verifyeq(int g, int vki, String R, String c, String pi){
+        return true;
     }
 
     public void rec ( ElectionPublicKey pk, int vk, ArrayList C , ArrayList c){
