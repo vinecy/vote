@@ -82,11 +82,13 @@ public class algo {
     meaning the election has been declared invalid.
      */
     public result tally (bulletinboard BB, int sk){
+        //etape 1,2,3
+        ArrayList<Integer> liste = null;
         for (ballot bb: BB.ballots  ) {
-            if (!validate(bb))
-            {
+            if (!validate(bb) || liste.contains(bb.upk)) {
                 return(new result(false, 1));
             }
+            liste.add(bb.upk);
         }
         return null;
     }
@@ -96,6 +98,14 @@ public class algo {
     Π is a valid proof of correct tallying for result. It returns accept if so; otherwise it returns reject
      */
     public Boolean verify ( bulletinboard BB, result result){
+        //etape 1,2,3
+        ArrayList<Integer> liste = null;
+        for (ballot bb: BB.ballots  ) {
+            if (!validate(bb) || liste.contains(bb.upk)) {
+                return(false);
+            }
+            liste.add(bb.upk);
+        }
         return(true);
     }
 }
