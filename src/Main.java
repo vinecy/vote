@@ -20,7 +20,7 @@ public class Main {
         t = Integer.parseInt(s);
         //demander l
         int l;
-        System.out.println("Donner L");
+        System.out.println("Donner l");
         BufferedReader bufferRead1 = new BufferedReader(new InputStreamReader(System.in));
         s = bufferRead.readLine();
         l = Integer.parseInt(s);
