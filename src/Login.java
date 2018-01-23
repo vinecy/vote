@@ -47,10 +47,11 @@ class Login extends JFrame implements ActionListener
             String value1=text1.getText();
             String value2=text2.getText();
             String value3=text3.getText();
-            if (value1.equals("login") && value3.equals("pwd") ) {
+            int id=Integer.parseInt(value2);
+            if (value1.equals(Main.L.get(id).getLogin()) && value3.equals(Main.L.get(id).getPwd()) ) {
                 System.out.println("ok");
 
-            Vote vote = new Vote(value1,value3,Integer.parseInt(value2));
+            Vote vote = new Vote(value1,value3,id);
                 this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 dispose();
 

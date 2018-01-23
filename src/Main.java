@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zied on 23/01/18.
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 public class Main {
 
     static ArrayList<Client> L =new ArrayList<Client>(3);
+    //static Map<String, String> questions = new HashMap<String, String>();
 
     public static void main(String[] args) throws IOException {
 
@@ -38,9 +41,9 @@ public class Main {
         nbClient = Integer.parseInt(s);
         //construire L
 
-        L.add(new Client("login", "pwd", 1));
-        L.add(new Client("login", "pwd", 2));
-        L.add(new Client("login", "pwd", 3));
+        L.add(new Client("login", "pwd", 0));
+        L.add(new Client("login1", "pwd1", 1));
+        L.add(new Client("login2", "pwd2", 2));
 
 
         for (int i=0; i<nbClient;i++)
