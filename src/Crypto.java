@@ -24,7 +24,7 @@ public class Crypto {
     }
 
 
-    public static String  sharedec(int ski, int vki, String R, String S){
+    public static String  sharedec(byte[] ski, byte[] vki, String R, String S){
         /*
             ShareDec(ski , vki , C) outputs (i, ci = Rxi ).
         */
@@ -32,17 +32,17 @@ public class Crypto {
     }
 
 
-    public boolean verifyeq(int g, int vki, String R, String c, String pi){
+    public boolean verifyeq(int g, byte[] vki, String R, String c, String pi){
         return true;
     }
 
-    public void rec ( ElectionPublicKey pk, int vk, ArrayList C , ArrayList c){
+    public void rec ( ElectionPublicKey pk, byte[] vk, ArrayList C , ArrayList c){
         /*
         Rec(pk, vk, C, C) parses C = (R, S), C = {ci1 , . . . , cit+1 } and outputs m
          */
     }
 
-    public static int Enc(int upk, int v){
+    public static int Enc(byte[] upk, int v){
          /*
            outputs C = (R, S) = (g r , Y r · m) for a plaintext m ∈ G and randomness r R ← Zq.
         */

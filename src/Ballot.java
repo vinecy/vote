@@ -1,10 +1,10 @@
 public class Ballot {
-    int upk;     // publick key
+    byte[] upk;  // publick key
     int C;       // vote encripted
     int pi;      // proof that C is either 1 or 0
     String sign; // sign of C+pi with usk
 
-    public Ballot( int upk, int C, int pi, String sign)
+    public Ballot( byte[] upk, int C, int pi, String sign)
     {
         this.upk=upk;
         this.C=C;

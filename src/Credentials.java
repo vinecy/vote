@@ -1,8 +1,8 @@
 public class Credentials {
-    int usk;
-    int upk;
+    byte[] usk;
+    byte[] upk;
 
-    public Credentials ( int usk,  int upk )
+    public Credentials ( byte[] usk,  byte[] upk )
     {
         this.usk=usk;
         this.upk=upk;

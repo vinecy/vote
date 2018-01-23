@@ -1,3 +1,4 @@
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -23,25 +24,30 @@ public class Trustee {
     λ and the total number l of trustees. It outputs an election public key pk, which includes the description of the set of
     admissible votes V; a list of secret keys sk. We assume pk to be an implicit input of the remaining algorithms.
     */
-    public ElectionPublicKey Setup(int security_parameter, int l, int t){
-       Shared s = Distkg(security_parameter, l , t);
-       int sk = s.sk.get(index);
-       ArrayList<Integer> vk = s.vk;
-       int pk = s.pk;
+    public ElectionPublicKey Setup( int l, int t){
+       Shared s = Distkg( l , t);
+        byte[] sk = s.sk.get(index);
+       ArrayList<byte[]> vk = s.vk;
+        byte[] pk = s.pk;
        ArrayList<Integer> v = null;
        v.add(0);v.add(1);
        return(new ElectionPublicKey(1,1,pk,vk,v,L,1));
     }
 
-    public Shared Distkg(int securityParameter, int t, int l)
+    public Shared Distkg( int t, int l)
     {
-        ArrayList<Integer> sk =null;
-        ArrayList<Integer> vk =null;
+        ArrayList<byte[]> sk =null;
+        ArrayList<byte[]> vk =null;
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[16]; // 128 bits are converted to 16 bytes;
+        random.nextBytes(bytes);
         for (int i =0 ; i<l; i++){
-            sk.add(i);
-            vk.add(i);
+            sk.add(bytes);
+            random.nextBytes(bytes);
+            vk.add(bytes);
+            random.nextBytes(bytes);
         }
-        int pk=1;
+        byte[] pk=bytes;
         return (new Shared( sk, vk, pk));
     }
 
@@ -54,7 +60,7 @@ public class Trustee {
         if ( validate(b)) {
             for (Iterator<Ballot> bb = BB.iterator(); bb.hasNext();) {
                 if(bb.next().upk==b.upk) {
-                    //bb.remove();
+                    bb.remove();
                 }
             }
             BB.add(b);
@@ -79,11 +85,11 @@ Validate(b) takes as input a ballot b and returns accept or reject for well/ill-
     ballots cast. It outputs the tally result, together with a proof of correct tabulation Π. Possibly, result = invalid,
     meaning the election has been declared invalid.
      */
-    public Result tally (ArrayList<Ballot> BB, int sk){
+    public Result tally (ArrayList<Ballot> BB, byte[] sk){
         //etape 1,2,3
         String somme_r = null;
         String somme_s = null;
-        ArrayList<Integer> liste = null;
+        ArrayList<byte[]> liste = null;
         for (Ballot bb: BB  ) {
             if (!validate(bb) || liste.contains(bb.upk)) {
                 return(new Result(false, 1));
@@ -92,7 +98,7 @@ Validate(b) takes as input a ballot b and returns accept or reject for well/ill-
             somme_r.concat(Integer.toString(bb.C));
             somme_s.concat(bb.sign);
         }
-        String c = Crypto.sharedec(sk, 1 , somme_r, somme_s);
+        //String c = Crypto.sharedec(sk, 1 , somme_r, somme_s);
         return null;
     }
 
@@ -102,7 +108,7 @@ Validate(b) takes as input a ballot b and returns accept or reject for well/ill-
      */
     public Boolean verify ( ArrayList<Ballot> BB, Result result){
         //etape 1,2,3
-        ArrayList<Integer> liste = null;
+        ArrayList<byte[]> liste = null;
         for (Ballot bb: BB ) {
             if (!validate(bb) || liste.contains(bb.upk)) {
                 return(false);

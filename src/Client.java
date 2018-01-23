@@ -22,7 +22,7 @@ public class Client {
         no credentials are needed, L is empty and Register(1λ, id) is void
          */
     public Credentials Register(int security_parameter, int id){
-        Credentials c = new Credentials(Signature.skeygen(security_parameter),Signature.skeygen(security_parameter));
+        Credentials c = new Credentials(Signature.skeygen(),Signature.skeygen());
         //Trustee.L.add(c.upk);
         p = new Credentials(c.usk,c.usk);
         return(c);
@@ -47,7 +47,7 @@ public class Client {
     their ballots will be included in the tally. It takes as input the bulletin board BB, a ballot b, and the voter’s
     credentials usk, upk and performs some validity checks, returning accept or reject.
      */
-    public Boolean verifyvote(ArrayList<Ballot> BB, int id, String upk, String usk, Ballot b){
+    public Boolean verifyvote(ArrayList<Ballot> BB, int id, byte[] upk, byte[] usk, Ballot b){
         return(BB.contains(b));
     }
 

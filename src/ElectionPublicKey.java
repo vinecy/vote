@@ -4,13 +4,13 @@ public class ElectionPublicKey {
 
     int G;
     int q;
-    int pk;
+    byte[] pk;
     ArrayList vk;
     ArrayList V;
     ArrayList L;
     int H;
 
-    public ElectionPublicKey(int g, int q, int pk, ArrayList vk, ArrayList v, ArrayList l, int h) {
+    public ElectionPublicKey(int g, int q, byte[] pk, ArrayList vk, ArrayList v, ArrayList l, int h) {
         G = g;
         this.q = q;
         this.pk = pk;

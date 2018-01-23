@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Shared {
 
-    ArrayList<Integer> sk; //secret key
-    ArrayList<Integer> vk; //verification key
-    Integer pk;
+    ArrayList<byte[]> sk; //secret key
+    ArrayList<byte[]> vk; //verification key
+    byte[] pk;
 
-    public Shared(ArrayList<Integer> sk, ArrayList<Integer> vk, Integer pk) {
+    public Shared(ArrayList<byte[]> sk, ArrayList<byte[]> vk, byte[] pk) {
         this.sk = sk;
         this.vk = vk;
         this.pk = pk;
