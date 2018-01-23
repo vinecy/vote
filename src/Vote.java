@@ -54,7 +54,6 @@ public class Vote extends JFrame implements ActionListener {
         choix=-1;
         if(choix1) choix = 0;
         if (choix2) choix =1;
-        System.out.println(choix);
         dispose();
     }
 }
