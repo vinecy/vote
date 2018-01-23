@@ -11,8 +11,8 @@ public class Algo {
     λ and the total number l of trustees. It outputs an election public key pk, which includes the description of the set of
     admissible votes V; a list of secret keys sk. We assume pk to be an implicit input of the remaining algorithms.
     */
-     public election_public_key Setup(int security_parameter, int l, int t){
-        return(new election_public_key());
+     public ElectionPublicKey Setup(int security_parameter, int l, int t){
+        return(new ElectionPublicKey());
     }
 
     /*
@@ -22,8 +22,8 @@ public class Algo {
     be included in the public key pk. Hence every algorithm in the voting protocol has access to L. Of course, if
     no credentials are needed, L is empty and Register(1λ, id) is void
      */
-    public credentials Register(int security_parameter, int id){
-        credentials c = new credentials(signature.skeygen(security_parameter),signature.skeygen(security_parameter));
+    public Credentials Register(int security_parameter, int id){
+        Credentials c = new Credentials(Signature.skeygen(security_parameter),Signature.skeygen(security_parameter));
         L.add(c.upk);
         return(c);
     }
@@ -32,10 +32,10 @@ public class Algo {
     Vote(id, upk, usk, v) is used by voter id to cast his choice v ∈ V for the election. It outputs a ballot b, which
     may/may not include the identifier id. The identifier id can be seen as an optional input.
      */
-    public ballot vote ( int id, int upk, int usk, int v){
-        int C =  crypto.Enc(upk, v);
+    public Ballot vote ( int id, int upk, int usk, int v){
+        int C =  Crypto.Enc(upk, v);
         int pi =  Disj.disjproof( 1, upk,1, 1);
-        return( new ballot(upk, C, pi, signature.sign(usk, Integer.toString(C)+Integer.toString(pi))));
+        return( new Ballot(upk, C, pi, Signature.sign(usk, Integer.toString(C)+Integer.toString(pi))));
     }
 
     /*
@@ -43,18 +43,18 @@ public class Algo {
     their ballots will be included in the tally. It takes as input the bulletin board BB, a ballot b, and the voter’s
     credentials usk, upk and performs some validity checks, returning accept or reject.
      */
-    public Boolean verifyvote(bulletinboard BB, int id, String upk, String usk, ballot b){
+    public Boolean verifyvote(Bulletinboard BB, int id, String upk, String usk, Ballot b){
         return(BB.ballots.contains(b));
     }
 
     /*
     Validate(b) takes as input a ballot b and returns accept or reject for well/ill-formed ballots
      */
-    public Boolean validate (ballot b)
+    public Boolean validate (Ballot b)
     {
         if (    L.contains(b.upk) &&
                 Disj.disjverify(1,b.upk, b.C, b.pi) &&
-                signature.sverify(b.upk,Integer.toString(b.C)+Integer.toString(b.pi))) {
+                Signature.sverify(b.upk,Integer.toString(b.C)+Integer.toString(b.pi))) {
             return(true);
         }
         return(false);
@@ -64,10 +64,10 @@ public class Algo {
     BallotBox(BB, b) takes as inputs the bulletin board BB and a ballot b. If Validate(b) accepts it adds b to BB;
     otherwise, it lets BB unchanged.
      */
-    public void ballotbox(bulletinboard BB, ballot b){
+    public void ballotbox(Bulletinboard BB, Ballot b){
 
         if ( validate(b)) {
-            for (Iterator<ballot> bb = BB.ballots.iterator(); bb.hasNext();) {
+            for (Iterator<Ballot> bb = BB.ballots.iterator(); bb.hasNext();) {
                 if(bb.next().upk==b.upk) {
                     bb.remove();
                 }
@@ -81,12 +81,12 @@ public class Algo {
     ballots cast. It outputs the tally result, together with a proof of correct tabulation Π. Possibly, result = invalid,
     meaning the election has been declared invalid.
      */
-    public result tally (bulletinboard BB, int sk){
+    public Result tally (Bulletinboard BB, int sk){
         //etape 1,2,3
         ArrayList<Integer> liste = null;
-        for (ballot bb: BB.ballots  ) {
+        for (Ballot bb: BB.ballots  ) {
             if (!validate(bb) || liste.contains(bb.upk)) {
-                return(new result(false, 1));
+                return(new Result(false, 1));
             }
             liste.add(bb.upk);
         }
@@ -97,10 +97,10 @@ public class Algo {
     Verify(BB,result, Π) takes as input the bulletin board BB, and a result/proof pair (result, Π) and checks whether
     Π is a valid proof of correct tallying for result. It returns accept if so; otherwise it returns reject
      */
-    public Boolean verify ( bulletinboard BB, result result){
+    public Boolean verify ( Bulletinboard BB, Result result){
         //etape 1,2,3
         ArrayList<Integer> liste = null;
-        for (ballot bb: BB.ballots  ) {
+        for (Ballot bb: BB.ballots  ) {
             if (!validate(bb) || liste.contains(bb.upk)) {
                 return(false);
             }

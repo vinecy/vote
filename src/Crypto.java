@@ -30,7 +30,7 @@ public class Crypto {
         */
     }
 
-    public void rec ( election_public_key pk, int vk, ArrayList C , ArrayList c){
+    public void rec ( ElectionPublicKey pk, int vk, ArrayList C , ArrayList c){
         /*
         Rec(pk, vk, C, C) parses C = (R, S), C = {ci1 , . . . , cit+1 } and outputs m
          */
