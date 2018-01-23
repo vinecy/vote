@@ -54,7 +54,7 @@ public class Trustee {
         if ( validate(b)) {
             for (Iterator<Ballot> bb = BB.iterator(); bb.hasNext();) {
                 if(bb.next().upk==b.upk) {
-                    bb.remove();
+                    //bb.remove();
                 }
             }
             BB.add(b);

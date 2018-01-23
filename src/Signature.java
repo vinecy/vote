@@ -1,8 +1,10 @@
+import java.util.Random;
+
 public class Signature {
 
     public static int  skeygen ( int security_parameter)
     {
-        return (0);
+        return (new Random().nextInt());
     }
 
     public static String sign (int usk , String m)

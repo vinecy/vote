@@ -50,11 +50,17 @@ public class Main {
 
         while(!(L.get(0).voted  && L.get(1).voted  && L.get(2).voted ))
         {
+            System.out.println("\nNouveau print!");
+            /*for (Ballot b:Trustee.BB
+                    ) {
+                System.out.println(b.upk);
+            }
+            */
         }
-
         for (Ballot b:Trustee.BB
-             ) {
+                ) {
             System.out.println(b.upk);
         }
+
     }
 }
