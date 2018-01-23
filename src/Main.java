@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Main {
 
+    static ArrayList<Client> L =new ArrayList<Client>(3);
 
     public static void main(String[] args) throws IOException {
 
