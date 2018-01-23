@@ -50,4 +50,24 @@ public class Client {
     public Boolean verifyvote(ArrayList<Ballot> BB, int id, String upk, String usk, Ballot b){
         return(BB.contains(b));
     }
+
+    public Credentials getP() {
+        return p;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Boolean getVoted() {
+        return voted;
+    }
 }
