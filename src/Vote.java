@@ -61,7 +61,6 @@ public class Vote extends JFrame implements ActionListener {
         choix=-1;
         if(choix1) choix = 0;
         if (choix2) choix =1;
-        Main.L.get(id).voted=true;
         Trustee t = new Trustee();
         t.ballotbox(Trustee.BB, Main.L.get(id).vote(id, choix));
         Main.L.get(id).voted=true;

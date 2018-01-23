@@ -38,7 +38,6 @@ public class Main {
         nbClient = Integer.parseInt(s);
         //construire L
 
-        ArrayList<Client> L =new ArrayList<Client>(3);
         L.add(new Client("login", "pwd", 1));
         L.add(new Client("login", "pwd", 2));
         L.add(new Client("login", "pwd", 3));
@@ -51,7 +50,6 @@ public class Main {
 
         while(!(L.get(0).voted  && L.get(1).voted  && L.get(2).voted ))
         {
-                System.out.println(L.get(0).voted+" "+L.get(1).voted+" "+L.get(2).voted);
         }
 
         for (Ballot b:Trustee.BB
