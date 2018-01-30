@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javallier.src.main.java.com.n1analytics.paillier.*;
 
 public class Crypto {
 
@@ -46,6 +47,7 @@ public class Crypto {
          /*
            outputs C = (R, S) = (g r , Y r · m) for a plaintext m ∈ G and randomness r R ← Zq.
         */
+        //EncodedNumber dede =new EncodedNumber();
         return (v);
     }
 
