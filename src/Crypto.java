@@ -43,12 +43,17 @@ public class Crypto {
          */
     }
 
-    public static int Enc(byte[] upk, int v){
+    public static EncryptedNumber Enc(PaillierPublicKey upk, int v){
          /*
            outputs C = (R, S) = (g r , Y r · m) for a plaintext m ∈ G and randomness r R ← Zq.
         */
         //EncodedNumber dede =new EncodedNumber();
-        return (v);
+//        PaillierPrivateKey keypair = PaillierPrivateKey.create(512);
+//        PaillierPublicKey  k = keypair.getPublicKey();
+        PaillierContext  c = upk.createSignedContext();
+
+
+        return (c.encrypt(v));
     }
 
 

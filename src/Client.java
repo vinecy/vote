@@ -1,8 +1,11 @@
+import javallier.src.main.java.com.n1analytics.paillier.EncryptedNumber;
+import javallier.src.main.java.com.n1analytics.paillier.PaillierPrivateKey;
+
 import java.util.ArrayList;
 
 public class Client {
 
-    private Credentials p;
+    private PaillierPrivateKey p;
     private String login;
     private String pwd;
     private int id;
@@ -21,10 +24,9 @@ public class Client {
         be included in the public key pk. Hence every algorithm in the voting protocol has access to L. Of course, if
         no credentials are needed, L is empty and Register(1λ, id) is void
          */
-    public Credentials Register(int security_parameter, int id){
-        Credentials c = new Credentials(Signature.skeygen(),Signature.skeygen());
+    public PaillierPrivateKey Register(int security_parameter, int id){
+        PaillierPrivateKey c = PaillierPrivateKey.create(security_parameter);
         //Trustee.L.add(c.upk);
-        p = new Credentials(c.usk,c.usk);
         return(c);
     }
 
@@ -33,10 +35,10 @@ public class Client {
    may/may not include the identifier id. The identifier id can be seen as an optional input.
     */
     public Ballot vote ( int id,  int v){
-        Register(1, id);
-        int C =  Crypto.Enc(p.upk, v);
-        int pi =  Disj.disjproof( 1, p.upk,1, 1);
-        Ballot b = new Ballot(p.upk, C, pi, Signature.sign(p.usk, Integer.toString(C)+Integer.toString(pi)));
+        PaillierPrivateKey p=  Register(512, id);
+        EncryptedNumber C =  Crypto.Enc(p.getPublicKey(), v);
+        int pi =  Disj.disjproof( 1, p.getPublicKey(),1, 1);
+        Ballot b = new Ballot(p.getPublicKey(), C, pi, Signature.sign(p, C.getExponent()+Integer.toString(pi)));
         //Trustee.BB.add(b);
         return(b);
     }
@@ -51,7 +53,7 @@ public class Client {
         return(BB.contains(b));
     }
 
-    public Credentials getP() {
+    public PaillierPrivateKey getP() {
         return p;
     }
 

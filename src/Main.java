@@ -20,26 +20,33 @@ public class Main {
         ArrayList<Integer> test=new ArrayList<>(1);
         test.add(1);
 
-        int t ;
-        //demander t
+        int t =3;
+        /*
+        dem=ander t
         System.out.println("Donner t");
         BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
         String s = bufferRead.readLine();
         t = Integer.parseInt(s);
-        //demander l
-        int l;
+        demander l
+        */
+
+        int l = 3;
+        /*
         System.out.println("Donner l");
         BufferedReader bufferRead1 = new BufferedReader(new InputStreamReader(System.in));
         s = bufferRead.readLine();
         l = Integer.parseInt(s);
+        demander nombre de clients
+        */
 
-        //demander nombre de clients
-        int nbClient;
+        int nbClient = 3;
+        /*
         System.out.println("Donner nombre de clients");
         BufferedReader bufferRead2 = new BufferedReader(new InputStreamReader(System.in));
         s = bufferRead.readLine();
         nbClient = Integer.parseInt(s);
-        //construire L
+        construire L
+        */
 
         L.add(new Client("login", "pwd", 0));
         L.add(new Client("login1", "pwd1", 1));
@@ -53,16 +60,11 @@ public class Main {
 
         while(!(L.get(0).voted  && L.get(1).voted  && L.get(2).voted ))
         {
-            System.out.println("\nNouveau print!");
-            /*for (Ballot b:Trustee.BB
-                    ) {
-                System.out.println(b.upk);
-            }
-            */
+            System.out.println(" ");
         }
         for (Ballot b:Trustee.BB
                 ) {
-            System.out.println(b.upk);
+            System.out.println(b.upk.getModulus());
         }
 
     }
